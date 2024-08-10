@@ -1,4 +1,3 @@
+import { startServer } from "./server";
 
-export function sayHelloWorld(world: string) {
-  return `Hello ${world}`;
-}
+startServer();
