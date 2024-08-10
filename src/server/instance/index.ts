@@ -8,6 +8,12 @@ export const Instances: Instance[] = [];
 export const Texts: Record</*nick*/ string, /*content*/ string> = {};
 
 export function registerInstance(socket: Socket, nickname: string) {
+  const instance = getInstanceByNick(nickname);
+
+  if (instance) {
+    socket.disconnect();
+    return;
+  }
   console.log(`Registering ${socket.id} as "${nickname}"`);
 
   socket.emit("connected");
@@ -31,9 +37,12 @@ export function unlinkInstanceBySocket(socket: Socket, disconnect = true) {
 
   if (!instance) return;
 
+  Instances.splice(Instances.indexOf(instance), 1);
+
   mainServer.emit(`leave`, instance.nickname);
   delete Texts[instance.nickname];
   updateClients();
+
   if (disconnect) instance.socket.disconnect();
 }
 
