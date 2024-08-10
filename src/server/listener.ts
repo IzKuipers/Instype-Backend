@@ -20,7 +20,7 @@ export async function socketListener(socket: Socket) {
 
     timeout = setTimeout(() => {
       unlinkInstanceBySocket(socket);
-    }, 30000);
+    }, 600000);
 
     processText(socket, text);
   });
