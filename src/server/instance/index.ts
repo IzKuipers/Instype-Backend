@@ -2,6 +2,7 @@ import { Socket } from "socket.io";
 import { Instance } from "../../types/instance";
 import { mainServer } from "..";
 import { getInstanceByNick, getInstanceBySocket } from "./get";
+import { updateClients } from "./update";
 
 export const Instances: Instance[] = [];
 export const Texts: Record</*nick*/ string, /*content*/ string> = {};
@@ -31,6 +32,7 @@ export function unlinkInstanceBySocket(socket: Socket) {
   if (!instance) return;
 
   mainServer.emit(`leave`, instance.nickname);
+  updateClients();
   instance.socket.disconnect();
 }
 
