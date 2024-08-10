@@ -1,0 +1,36 @@
+{
+  "name": "instype",
+  "version": "1.0.0",
+  "description": "Instype Backend",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IzKuipers/Instype-Backend.git"
+  },
+  "author": {
+    "name": "Izaak Kuipers",
+    "email": "izaak.kuipers@gmail.com"
+  },
+  "license": "GPLv3",
+  "private": true,
+  "dependencies": {
+    "@types/node": "^22.2.0",
+    "socket.io": "^4.7.5",
+    "tslint": "^6.1.3",
+    "typescript": "^5.5.4"
+  },
+  "bugs": {
+    "url": "https://github.com/IzKuipers/Instype-Backend/issues"
+  },
+  "homepage": "https://github.com/IzKuipers/Instype-Backend#readme",
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
+  }
+}
