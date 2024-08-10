@@ -26,14 +26,15 @@ export function unlinkInstance(nickname: string) {
   instance.socket.disconnect();
 }
 
-export function unlinkInstanceBySocket(socket: Socket) {
+export function unlinkInstanceBySocket(socket: Socket, disconnect = true) {
   const instance = getInstanceBySocket(socket);
 
   if (!instance) return;
 
   mainServer.emit(`leave`, instance.nickname);
+  delete Texts[instance.nickname];
   updateClients();
-  instance.socket.disconnect();
+  if (disconnect) instance.socket.disconnect();
 }
 
 export function processText(socket: Socket, content: string) {

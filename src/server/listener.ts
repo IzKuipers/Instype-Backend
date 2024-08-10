@@ -29,6 +29,6 @@ export async function socketListener(socket: Socket) {
 
   socket.on("disconnect", () => {
     clearTimeout(timeout);
-    unlinkInstanceBySocket(socket);
+    unlinkInstanceBySocket(socket, false);
   });
 }
