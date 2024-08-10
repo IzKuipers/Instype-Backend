@@ -5,6 +5,7 @@ import {
   unlinkInstanceBySocket,
 } from "./instance";
 import { updateClients } from "./instance/update";
+import { getInstanceBySocket } from "./instance/get";
 
 export async function socketListener(socket: Socket) {
   let timeout: NodeJS.Timeout;
@@ -16,7 +17,11 @@ export async function socketListener(socket: Socket) {
   });
 
   socket.on("text", (text: string) => {
+    const instance = getInstanceBySocket(socket);
+
     clearTimeout(timeout);
+
+    if (instance?.socket.disconnected) return;
 
     timeout = setTimeout(() => {
       unlinkInstanceBySocket(socket);
